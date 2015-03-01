@@ -38,18 +38,27 @@ test_color = "r"
 ### please name it reg, so that the plotting code below picks it up and 
 ### plots it correctly
 
-
-
-
-
+from sklearn import linear_model
+reg = linear_model.LinearRegression(fit_intercept=True,normalize=False, copy_X=True)
+reg.fit(feature_train,target_train)
+pred=reg.predict(feature_train)
+print reg.coef_
+slope = reg.coef_ 
+intercept = reg.intercept_
+print "slope",slope
+print "intercept",intercept
+test_score = reg.score(feature_test,target_test)
+print test_score
+train_score = reg.score(feature_train,target_train)
+print train_score
 
 
 
 ### draw the scatterplot, with color-coded training and testing points
 import matplotlib.pyplot as plt
-for feature, target in zip(feature_test, target_test):
+for feature, target in zip(feature_test,target_test):
     plt.scatter( feature, target, color=test_color ) 
-for feature, target in zip(feature_train, target_train):
+for feature, target in zip(feature_train,target_train):
     plt.scatter( feature, target, color=train_color ) 
 
 ### labels for the legend
